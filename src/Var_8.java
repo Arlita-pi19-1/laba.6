@@ -1,13 +1,16 @@
 import java.io.*;
 
 public class Var_8 {
+    public static boolean checkStringLongerFive(String string){
+        return (string.length()>5);
+    }
     public static void main(String[] args) throws IOException {
         InputStream in=null;
         Reader file=null;
         BufferedReader buf=null;
 
         OutputStream out=null;
-        OutputStreamWriter wr=null;
+        Writer wr=null;
         try {
             in=new FileInputStream("C:\\Me\\look.txt");
             file=new InputStreamReader(in, "cp1251");
@@ -25,7 +28,8 @@ public class Var_8 {
 
                 int num_line=1;
 
-                String str="line";
+                String str="line1";
+                String strTwo="line2";
                 str.length();
 
                 while ((line=buf.readLine()) !=null){
@@ -36,8 +40,8 @@ public class Var_8 {
                     int count=0;
 
                     for(int i=1; i<words.length; i++){
-                        if (line.length()>5){
-                            wr.append(line+"");
+                        if (checkStringLongerFive(words[i])){
+                            wr.append(words[i]+"");
                             count++;
                         }
                     }
@@ -52,9 +56,12 @@ public class Var_8 {
         }
         finally {
             in.close();
-            out.close();
+            file.close();
             buf.close();
-
+            wr.flush();
+            wr.close();
+            out.close();
+            
         }
 
     }
